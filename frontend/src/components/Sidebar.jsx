@@ -1,13 +1,14 @@
+import { Bot, Users } from 'lucide-react';
 import { useEffect, useState } from "react";
 
 import SidebarSkeleton from "./skeletons/SidebarSkeleton.jsx";
-import { Users } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore.js";
 import { useChatStore } from "../store/useChatStore.js";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
-
   const { onlineUsers } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
   
@@ -28,7 +29,7 @@ const Sidebar = () => {
           <Users className="size-6" />
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
-        {/* TODO: Online filter toggle */}
+        {/* Online filter toggle */}
          <div className="mt-3 hidden lg:flex items-center gap-2">
           <label className="cursor-pointer flex items-center gap-2">
             <input
@@ -43,6 +44,26 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="overflow-y-auto w-full py-3">
+        {/* AI Chat Option */}
+        <button
+          onClick={() => navigate("/ai")}
+          className="w-full p-3 flex items-center gap-3 hover:bg-base-300 transition-colors border-b border-base-300 pb-4 mb-2"
+        >
+          <div className="relative mx-auto lg:mx-0">
+            <div className="size-12 flex items-center justify-center bg-purple-100 rounded-full">
+              <Bot className="size-6 text-purple-600" />
+            </div>
+          </div>
+          
+          {/* AI Chat info - only visible on larger screens */}
+          <div className="hidden lg:block text-left min-w-0">
+            <div className="font-medium truncate">ChattyAI</div>
+            <div className="text-sm text-purple-500">
+              Ask me anything
+            </div>
+          </div>
+        </button>
+
         {filteredUsers.map((user) => (
           <button
             key={user._id}
