@@ -11,7 +11,7 @@ const AiChat = () => {
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // Pre-filled with your API key
-  const [apiKey, setApiKey] = useState("AIzaSyAQWhCftb1aAJjwEvx6QPXns1Jz-mfTDdw");
+  const [apiKey, setApiKey] = useState("");
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
 
